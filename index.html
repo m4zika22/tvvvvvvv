@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Streaming Portal - All Apps</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        
+        .app-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .app-card:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #00ffff;
+            transform: translateY(-5px);
+        }
+        
+        .app-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .app-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .video-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .category {
+            margin: 30px 0 15px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎬 Ultimate Streaming Portal</h1>
+        <p>Click any app to start streaming</p>
+    </div>
+
+    <div class="category">
+        <h2>📺 Live TV & News</h2>
+    </div>
+    <div class="apps-grid">
+        <div class="app-card" onclick="openStream('news', 'https://www.youtube.com/embed/21X5lGlDOfg')">
+            <div class="app-icon">📰</div>
+            <div class="app-name">BBC News Live</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('news', 'https://www.youtube.com/embed/9auC9_a2xKc')">
+            <div class="app-icon">🌍</div>
+            <div class="app-name">CNN International</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('news', 'https://www.youtube.com/embed/0R8e28N_ftQ')">
+            <div class="app-icon">📡</div>
+            <div class="app-name">Sky News</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🎵 Music & Radio</h2>
+    </div>
+    <div class="apps-grid">
+        <div class="app-card" onclick="openStream('music', 'https://www.youtube.com/embed/5qmPHPMGoJA')">
+            <div class="app-icon">🎧</div>
+            <div class="app-name">Relaxing Music</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('music', 'https://www.youtube.com/embed/jfKfPfyJRdk')">
+            <div class="app-icon">📻</div>
+            <div class="app-name">Lofi Radio</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('music', 'https://www.youtube.com/embed/7wtfhZwyrcc')">
+            <div class="app-icon">🤘</div>
+            <div class="app-name">Imagine Dragons</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🎮 Entertainment & Gaming</h2>
+    </div>
+    <div class="apps-grid">
+        <div class="app-card" onclick="openStream('entertainment', 'https://www.twitch.tv/embed/twitchpresents/chat?parent=twitch.tv')">
+            <div class="app-icon">🎮</div>
+            <div class="app-name">Twitch TV</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('entertainment', 'https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <div class="app-icon">😂</div>
+            <div class="app-name">Funny Videos</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('entertainment', 'https://www.youtube.com/embed/9bZkp7q19f0')">
+            <div class="app-icon">💃</div>
+            <div class="app-name">Gangnam Style</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🌄 Nature & Relaxation</h2>
+    </div>
+    <div class="apps-grid">
+        <div class="app-card" onclick="openStream('nature', 'https://www.youtube.com/embed/1ZYbU82GVz4')">
+            <div class="app-icon">🏞️</div>
+            <div class="app-name">Forest Stream</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('nature', 'https://www.youtube.com/embed/0Z9-Ag-dyE0')">
+            <div class="app-icon">🌅</div>
+            <div class="app-name">Ocean Waves</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('nature', 'https://www.youtube.com/embed/9Wqo-Oa9_4o')">
+            <div class="app-icon">🔥</div>
+            <div class="app-name">Fireplace</div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🌐 Web & Utilities</h2>
+    </div>
+    <div class="apps-grid">
+        <div class="app-card" onclick="openStream('web', 'https://www.wikipedia.org')">
+            <div class="app-icon">📚</div>
+            <div class="app-name">Wikipedia</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('web', 'https://www.weather.com')">
+            <div class="app-icon">🌤️</div>
+            <div class="app-name">Weather</div>
+        </div>
+        
+        <div class="app-card" onclick="openStream('web', 'https://www.google.com')">
+            <div class="app-icon">🔍</div>
+            <div class="app-name">Google</div>
+        </div>
+    </div>
+
+    <!-- Video Player -->
+    <div class="video-container" id="videoContainer">
+        <button class="back-button" onclick="closeStream()">← Back to Menu</button>
+        <iframe class="video-frame" id="videoFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function openStream(type, url) {
+            const videoContainer = document.getElementById('videoContainer');
+            const videoFrame = document.getElementById('videoFrame');
+            
+            // Add autoplay for YouTube videos
+            if (url.includes('youtube.com')) {
+                url += (url.includes('?') ? '&' : '?') + 'autoplay=1';
+            }
+            
+            videoFrame.src = url;
+            videoContainer.style.display = 'block';
+        }
+        
+        function closeStream() {
+            const videoContainer = document.getElementById('videoContainer');
+            const videoFrame = document.getElementById('videoFrame');
+            
+            videoFrame.src = '';
+            videoContainer.style.display = 'none';
+        }
+        
+        // Close video when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeStream();
+            }
+        });
+    </script>
+</body>
+</html>
